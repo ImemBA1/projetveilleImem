@@ -1,6 +1,6 @@
 from django.urls import path
-from . import views
+from .views import ListeTache
 
 urlpatterns = [
-    path('', views.listeTache, name='tache'),
+    path('', ListeTache.as_view(), name='tache'),
 ]
