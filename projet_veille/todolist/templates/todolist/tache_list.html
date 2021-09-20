@@ -1,0 +1,14 @@
+<h1>test123</h1>
+
+<table> 
+    <tr>
+        <th>Tache</th>
+    </tr>
+    {% for tache in object_list %}
+    <tr>
+        <td>{{tache.titre}}</td>
+    </tr>
+    {% empty %}
+        <h5>Vide</h5>
+    {% endfor%}
+</table>
