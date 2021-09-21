@@ -1,5 +1,15 @@
+{% if request.user.is_authenticated %}
+    <p>{{request.user}}</p>
+    <a href=''>Se deconnecter</a>
+{% else %}
+    <a href="{% url 'login' %}">Se Connecter</a>
+{% endif %}
+
 <h1>Liste des taches</h1>
+
+
 <a href="{% url 'cree-tache' %}">Ajout Tache</a>
+<br>
 <table> 
     <tr>
         <th>Tache</th>
