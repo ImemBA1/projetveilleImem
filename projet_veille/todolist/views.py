@@ -6,14 +6,23 @@ from .models import Tache
 from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy
 
+
 class ListeTache(ListView):
     model = Tache
+
 
 class DetailTache(DetailView):
     model = Tache
     context_object_name = "tache"
 
+
 class CreeTache(CreateView):
+    model = Tache
+    fields = '__all__' # tout les champs 
+    success_url = reverse_lazy('taches') #retour à la page d'accueil
+
+
+class ModifierTache(UpdateView):
     model = Tache
     fields = '__all__' # tout les champs 
     success_url = reverse_lazy('taches') #retour à la page d'accueil

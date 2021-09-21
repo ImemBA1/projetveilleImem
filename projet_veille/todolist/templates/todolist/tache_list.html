@@ -4,11 +4,14 @@
     <tr>
         <th>Tache</th>
         <th></th>
+        <th></th>
     </tr>
     {% for tache in object_list %}
     <tr>
         <td>{{tache.titre}}</td>
+        <td><a href="{% url 'modif-tache' tache.id %}">Edit</a></td>
         <td><a href="{% url 'tache' tache.id %}">Details</a></td>
+
     </tr>
     {% empty %}
         <h5>Vide</h5>
