@@ -14,24 +14,24 @@ class ListeTache(LoginRequiredMixin, ListView):
     model = Tache
 
 
-class DetailTache(DetailView):
+class DetailTache(LoginRequiredMixin, DetailView):
     model = Tache
     context_object_name = "tache"
 
 
-class CreeTache(CreateView):
+class CreeTache(LoginRequiredMixin, CreateView):
     model = Tache
     fields = '__all__' # tout les champs 
     success_url = reverse_lazy('taches') #retour à la page d'accueil
 
 
-class ModifierTache(UpdateView):
+class ModifierTache(LoginRequiredMixin, UpdateView):
     model = Tache
     fields = '__all__'
     success_url = reverse_lazy('taches') 
 
 
-class SupprTache(DeleteView):
+class SupprTache(LoginRequiredMixin, DeleteView):
     model = Tache
     success_url = reverse_lazy('taches') 
 
