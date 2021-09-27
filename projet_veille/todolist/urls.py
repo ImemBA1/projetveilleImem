@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CreeTache, DetailTache, ListeTache, ModifierTache, SupprTache, LoginV
+from .views import *
 
 urlpatterns = [
     path('', ListeTache.as_view(), name='taches'),
