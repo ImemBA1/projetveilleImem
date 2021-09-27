@@ -7,9 +7,10 @@ from .models import Tache
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class ListeTache(ListView):
+class ListeTache(LoginRequiredMixin, ListView):
     model = Tache
 
 
