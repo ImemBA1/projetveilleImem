@@ -12,6 +12,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 class ListeTache(LoginRequiredMixin, ListView):
     model = Tache
+    context_object_name = "taches"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['taches'] = context['taches'].filter(utilisateur=self.request.user)
+        context['count'] = context['taches'].filter(termine=False).count()
+        return context
 
 
 class DetailTache(LoginRequiredMixin, DetailView):
