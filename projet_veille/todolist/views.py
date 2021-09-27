@@ -28,13 +28,17 @@ class DetailTache(LoginRequiredMixin, DetailView):
 
 class CreeTache(LoginRequiredMixin, CreateView):
     model = Tache
-    fields = '__all__' # tout les champs 
+    fields = {'titre','description', 'termine'}
     success_url = reverse_lazy('taches') #retour à la page d'accueil
+
+    def form_valid(self, form):
+        form.instance.utilisateur = self.request.user
+        return super(CreeTache, self).form_valid(form)
 
 
 class ModifierTache(LoginRequiredMixin, UpdateView):
     model = Tache
-    fields = '__all__'
+    fields = {'titre','description', 'termine'}
     success_url = reverse_lazy('taches') 
 
 
@@ -45,7 +49,7 @@ class SupprTache(LoginRequiredMixin, DeleteView):
 
 class LoginV(LoginView):
     template_name = "todolist/login.html"
-    fields = '__all__'
+    fields = '__all__' # tout les champs
     redirect_authenticated_user = True
 
     def get_success_url(self):
