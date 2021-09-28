@@ -1,6 +1,6 @@
 import todolist
 from todolist.models import Tache
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from .models import Tache
@@ -63,9 +63,16 @@ class RegisterV(FormView):
     form_class = UserCreationForm
     redirect_authenticated_user = True
     success_url = reverse_lazy('taches')
-    
+
+
     def form_valid(self, form): 
         user = form.save()
         if user is not None:
             login(self.request, user)
         return super(RegisterV, self).form_valid(form)
+
+
+    def get(self, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return redirect("taches")
+        return super(RegisterV, self).get()
