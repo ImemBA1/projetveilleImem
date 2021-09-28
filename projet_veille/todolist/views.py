@@ -20,6 +20,10 @@ class ListeTache(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['taches'] = context['taches'].filter(utilisateur=self.request.user)
         context['count'] = context['taches'].filter(termine=False).count()
+        recherche = self.request.GET.get('recherche-input') or ''
+        if recherche:
+            context['taches'] = context['taches'].filter(titre__startswith=recherche)
+        context['recherche'] = recherche
         return context
 
 

@@ -10,7 +10,7 @@
 
 <a href="{% url 'cree-tache' %}">Ajout Tache</a>
 <form method='get'>
-    <input type="text" >
+    <input type="text" name='recherche-input' value="{{recherche}}">
     <input type="submit" value="Rechercher">
 </form>
 <br>
