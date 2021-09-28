@@ -34,7 +34,7 @@ class DetailTache(LoginRequiredMixin, DetailView):
 
 class CreeTache(LoginRequiredMixin, CreateView):
     model = Tache
-    fields = {'titre','description', 'termine'}
+    fields = {'titre','description', 'termine','important'}
     success_url = reverse_lazy('taches') #retour à la page d'accueil
 
     def form_valid(self, form):
@@ -44,7 +44,7 @@ class CreeTache(LoginRequiredMixin, CreateView):
 
 class ModifierTache(LoginRequiredMixin, UpdateView):
     model = Tache
-    fields = {'titre','description', 'termine'}
+    fields = {'titre','description', 'termine','important'}
     success_url = reverse_lazy('taches') 
 
 
