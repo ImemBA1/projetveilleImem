@@ -9,6 +9,7 @@ urlpatterns = [
     path('modif-tache/<int:pk>/', ModifierTache.as_view(), name='modif-tache'),
     path('suppr-tache/<int:pk>/', SupprTache.as_view(), name='suppr-tache'),
     path('login/', LoginV.as_view(), name='login'),
-    path('logout/', LogoutView.as_view(next_page='login'), name='logout')
+    path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
+    path('register/', RegisterV.as_view(), name='register')
 
 ]
