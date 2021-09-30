@@ -1,42 +1,41 @@
 {% extends 'todolist/main.html' %}
 {% block content %}
 
+<div class="full-withradius border">
+    {% if request.user.is_authenticated %}
+        <p>{{request.user}}</p>
+        <a href="{% url 'logout' %}">Se deconnecter</a>
+    {% else %}
+        <a href="{% url 'login' %}">Se Connecter</a>
+    {% endif %}
 
-{% if request.user.is_authenticated %}
-    <p>{{request.user}}</p>
-    <a href="{% url 'logout' %}">Se deconnecter</a>
-{% else %}
-    <a href="{% url 'login' %}">Se Connecter</a>
-{% endif %}
-
-<h1>Liste des taches</h1>
-
-
-<a href="{% url 'cree-tache' %}">Ajout Tache</a>
-<form method='get'>
-    <input type="text" name='recherche-input' value="{{recherche}}">
-    <input type="submit" value="Rechercher">
-</form>
-<br>
-<table> 
-    <tr>
-        <th>Tache</th>
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
-    {% for tache in taches %}
-    <tr>
-        <td>{{tache.titre}}</td>
-        <td><a href="{% url 'modif-tache' tache.id %}">Modifier</a></td>
-        <td><a href="{% url 'suppr-tache' tache.id %}">Supprimer</a></td>
-        <td><a href="{% url 'tache' tache.id %}">Details</a></td>
-        
-    </tr>
-    {% empty %}
-        <h5>Vide</h5>
-    {% endfor%}
-</table>
+    <h1>Liste des tâches</h1>
 
 
+    <h3><a href="{% url 'cree-tache' %}">Ajout Tache</a></h3>
+    <form method='get'>
+        <input type="text" name='recherche-input' value="{{recherche}}">
+        <input type="submit" value="Rechercher">
+    </form>
+    <table> 
+        <tr>
+            <th>Tache</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+            {% for tache in taches %}
+        <tr>
+            <td>{{tache.titre}}</td>
+            <td><a href="{% url 'modif-tache' tache.id %}">Modifier</a></td>
+            <td><a href="{% url 'suppr-tache' tache.id %}">Supprimer</a></td>
+            <td><a href="{% url 'tache' tache.id %}">Details</a></td>
+            
+        </tr>
+        {% empty %}
+            <h5>Vide</h5>
+        {% endfor%}
+    </table>
+
+</div>
 {% endblock content %}
