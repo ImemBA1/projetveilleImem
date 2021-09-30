@@ -4,10 +4,14 @@
 <div class="full-withradius border">
 
     <form method="post">
-        {% csrf_token %} 
+        {% csrf_token %}
         <p>Vous allez supprimer la tâche {{tache}}, vous êtes sûr? </p>
-        <button type="submit" >Supprimer</button>
+        <button type="submit">Supprimer</button>
     </form>
+    <div style="margin-top: 2% ">
+        <a href="{% url 'taches' %}">Retour</a>
+    </div>
+
 
 </div>
 
