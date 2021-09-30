@@ -13,8 +13,8 @@
 
     </div>
 
-    <h2>Liste des tâches</h2>
     {% if compteur != 0 %}
+    <h2>Liste des tâches</h2>
         <h5>Vous avez {{compteur}} tâche{{compteur|pluralize:"s"}}
             incomplète{{compteur|pluralize:"s"}} dont {{compteur_important}} importante{{compteur_important|pluralize:"s"}}
         </h5>
@@ -22,51 +22,32 @@
         <h5>Vous n'avez aucune tâche à faire! Bravo <b>{{request.user}}</b></h5>
     {% endif %}
 
+    {% if compteur != 0 %}
     <form method='get'>
         <input type="text" name='recherche-input' value="{{recherche}}">
         <button type="submit">Rechercher</button>
     </form>
-
+    {% endif %}
     <div class="liste-tache">
-    {% for tache in taches %}
-    <div>
-        <div>
-            {% if tache.termine %}
-                <i><s><a href="{% url 'modif-tache' tache.id %}">{{tache.titre}}</a></s></i>
-            {% else %}
-                <a href="{% url 'modif-tache' tache.id %}">{{tache.titre}}</a> 
-            {% endif %}
-        </div>
-        <div>
-            <a  href="{% url 'suppr-tache' tache.id %}">&#215;</a>
-        </div>
-    </div>
-    <h3><a href="{% url 'cree-tache' %}">Nouvelle tâche</a></h3>
-    {% empty %}
-        <h3><a href="{% url 'cree-tache' %}">Ajouter vos tâches ici!</a></h3>
-    {% endfor %}
-</div>
-
-    {% comment %} <table>
-        <tr>
-            <th>Tache</th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
         {% for tache in taches %}
-        <tr>
-            <td>{{tache.titre}}</td>
-            <td><a href="{% url 'modif-tache' tache.id %}">Modifier</a></td>
-            <td><a href="{% url 'suppr-tache' tache.id %}">Supprimer</a></td>
-            <td><a href="{% url 'tache' tache.id %}">Details</a></td>
-
-        </tr>
+            <div>
+                <div>
+                    {% if tache.termine %}
+                        <i><s><a href="{% url 'modif-tache' tache.id %}">{{tache.titre}}</a></s></i>
+                    {% else %}
+                        <a href="{% url 'modif-tache' tache.id %}">{{tache.titre}}</a> 
+                    {% endif %}
+                </div>
+                <div>
+                    <a  href="{% url 'suppr-tache' tache.id %}">&#215;</a>
+                </div>
+            </div>
         {% empty %}
-            <h5>Vide</h5>
-        {% endfor%}
-    </table> {% endcomment %}
-    
-
+            <h3><a href="{% url 'cree-tache' %}">Ajouter vos tâches ici!</a></h3>
+        {% endfor %}
+        {% if compteur_existe != 0 %}
+            <h3><a href="{% url 'cree-tache' %}">Nouvelle tâche</a></h3>
+        {% endif %}
+    </div>
 </div>
 {% endblock content %}
