@@ -2,25 +2,30 @@
 {% block content %}
 
 <div class="full-withradius border">
-    {% if request.user.is_authenticated %}
-        <h3>Utilisateur : <b>{{request.user}}</b></h3>
-        {% if compteur != 0 %}
-            <h5>Vous avez {{compteur}} tâche(s) incomplète(s) dont {{compteur_important}} importante(s)</h5>
+
+    <div>
+
+        {% if request.user.is_authenticated %}
+            <h1>Utilisateur : <b>{{request.user}}</b></h1>
+            <a href="{% url 'logout' %}">Se déconnecter</a>
         {% else %}
-            <h5>Vous n'avez aucune tâche à faire! Bravo <b>{{request.user}}</b></h5>
+            <a href="{% url 'login' %}">Se connecter</a>
         {% endif %}
-        <a style= "" href="{% url 'logout' %}">Se deconnecter</a>
+
+    </div>
+
+    <h2>Liste des tâches</h2>
+    {% if compteur != 0 %}
+        <h5>Vous avez {{compteur}} tâche{{compteur|pluralize:"s"}}
+            incomplète{{compteur|pluralize:"s"}} dont {{compteur_important}} importante{{compteur_important|pluralize:"s"}}
+        </h5>
     {% else %}
-        <a href="{% url 'login' %}">Se Connecter</a>
+        <h5>Vous n'avez aucune tâche à faire! Bravo <b>{{request.user}}</b></h5>
     {% endif %}
 
-    <h1>Liste des tâches</h1>
-
-
-    <h3><a href="{% url 'cree-tache' %}">Ajout Tache</a></h3>
     <form method='get'>
         <input type="text" name='recherche-input' value="{{recherche}}">
-        <button type="submit" >Rechercher</button>
+        <button type="submit">Rechercher</button>
     </form>
     <table>
         <tr>
@@ -29,18 +34,19 @@
             <th></th>
             <th></th>
         </tr>
-            {% for tache in taches %}
+        {% for tache in taches %}
         <tr>
             <td>{{tache.titre}}</td>
             <td><a href="{% url 'modif-tache' tache.id %}">Modifier</a></td>
             <td><a href="{% url 'suppr-tache' tache.id %}">Supprimer</a></td>
             <td><a href="{% url 'tache' tache.id %}">Details</a></td>
-            
+
         </tr>
         {% empty %}
             <h5>Vide</h5>
         {% endfor%}
     </table>
+    <h3><a href="{% url 'cree-tache' %}">Ajout Tache</a></h3>
 
 </div>
 {% endblock content %}
