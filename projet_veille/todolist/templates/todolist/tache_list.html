@@ -3,8 +3,9 @@
 
 <div class="full-withradius border">
     {% if request.user.is_authenticated %}
-        <p>{{request.user}}</p>
-        <a href="{% url 'logout' %}">Se deconnecter</a>
+        <h3>Utilisateur : <b>{{request.user}}</b></h3>
+        <h5>Vous avez {{compteur}} tâche(s) dont {{compteur_important}} importante(s)</h5>
+        <a style= "" href="{% url 'logout' %}">Se deconnecter</a>
     {% else %}
         <a href="{% url 'login' %}">Se Connecter</a>
     {% endif %}
@@ -17,7 +18,7 @@
         <input type="text" name='recherche-input' value="{{recherche}}">
         <input type="submit" value="Rechercher">
     </form>
-    <table> 
+    <table>
         <tr>
             <th>Tache</th>
             <th></th>
