@@ -2,7 +2,6 @@
 {% block content %}
 
 <div class="full-withradius border">
-
     <div>
 
         {% if request.user.is_authenticated %}
@@ -27,7 +26,28 @@
         <input type="text" name='recherche-input' value="{{recherche}}">
         <button type="submit">Rechercher</button>
     </form>
-    <table>
+
+    <div class="liste-tache">
+    {% for tache in taches %}
+    <div>
+        <div>
+            {% if tache.termine %}
+                <i><s><a href="{% url 'modif-tache' tache.id %}">{{tache.titre}}</a></s></i>
+            {% else %}
+                <a href="{% url 'modif-tache' tache.id %}">{{tache.titre}}</a> 
+            {% endif %}
+        </div>
+        <div>
+            <a  href="{% url 'suppr-tache' tache.id %}">&#215;</a>
+        </div>
+    </div>
+    <h3><a href="{% url 'cree-tache' %}">Nouvelle tâche</a></h3>
+    {% empty %}
+        <h3><a href="{% url 'cree-tache' %}">Ajouter vos tâches ici!</a></h3>
+    {% endfor %}
+</div>
+
+    {% comment %} <table>
         <tr>
             <th>Tache</th>
             <th></th>
@@ -45,8 +65,8 @@
         {% empty %}
             <h5>Vide</h5>
         {% endfor%}
-    </table>
-    <h3><a href="{% url 'cree-tache' %}">Ajout Tache</a></h3>
+    </table> {% endcomment %}
+    
 
 </div>
 {% endblock content %}
