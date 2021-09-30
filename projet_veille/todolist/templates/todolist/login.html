@@ -1,3 +1,6 @@
+{% extends 'todolist/main.html' %}
+{% block content %}
+
 <h2>Connexion</h2>
 
 <form method='post'>
@@ -7,3 +10,5 @@
 </form>
 
 <p><a href="{% url 'register' %}" >Inscrivez-vous!</a></p>
+
+{% endblock content %}

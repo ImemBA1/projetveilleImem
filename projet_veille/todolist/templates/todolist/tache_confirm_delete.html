@@ -1,5 +1,10 @@
+{% extends 'todolist/main.html' %}
+{% block content %}
+
 <form method="post">
      {% csrf_token %} 
     <p>Vous allez supprimer la tâche {{tache}}, vous êtes sûr? </p>
     <input type="submit" value="Supprimer">
 </form>
+
+{% endblock content %}

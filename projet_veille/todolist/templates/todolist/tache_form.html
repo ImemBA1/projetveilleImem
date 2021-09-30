@@ -1,7 +1,12 @@
-<h1>Ajout Tache</h1>
+{% extends 'todolist/main.html' %}
+{% block content %}
+
+<h2>Ajout Tache</h2>
 
 <form method='post' action=''>
     {% csrf_token %}
     {{form.as_p}}
     <input type="submit" value="Ajouter">
 </form>
+
+{% endblock content %}
