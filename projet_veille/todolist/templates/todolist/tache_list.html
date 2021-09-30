@@ -4,7 +4,7 @@
 <div class="full-withradius border">
     {% if request.user.is_authenticated %}
         <h3>Utilisateur : <b>{{request.user}}</b></h3>
-        <h5>Vous avez {{compteur}} tâche(s) dont {{compteur_important}} importante(s)</h5>
+        <h5>Vous avez {{compteur}} tâche(s) incomplète(s) dont {{compteur_important}} importante(s)</h5>
         <a style= "" href="{% url 'logout' %}">Se deconnecter</a>
     {% else %}
         <a href="{% url 'login' %}">Se Connecter</a>
@@ -16,7 +16,7 @@
     <h3><a href="{% url 'cree-tache' %}">Ajout Tache</a></h3>
     <form method='get'>
         <input type="text" name='recherche-input' value="{{recherche}}">
-        <input type="submit" value="Rechercher">
+        <button type="submit" >Rechercher</button>
     </form>
     <table>
         <tr>
