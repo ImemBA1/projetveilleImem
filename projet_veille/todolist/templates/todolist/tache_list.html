@@ -4,7 +4,11 @@
 <div class="full-withradius border">
     {% if request.user.is_authenticated %}
         <h3>Utilisateur : <b>{{request.user}}</b></h3>
-        <h5>Vous avez {{compteur}} tâche(s) incomplète(s) dont {{compteur_important}} importante(s)</h5>
+        {% if compteur != 0 %}
+            <h5>Vous avez {{compteur}} tâche(s) incomplète(s) dont {{compteur_important}} importante(s)</h5>
+        {% else %}
+            <h5>Vous n'avez aucune tâche à faire! Bravo <b>{{request.user}}</b></h5>
+        {% endif %}
         <a style= "" href="{% url 'logout' %}">Se deconnecter</a>
     {% else %}
         <a href="{% url 'login' %}">Se Connecter</a>
